@@ -827,6 +827,7 @@ LINKSPEC_CPP AAC_DECODER_ERROR CAacDecoder_Init(HANDLE_AACDECODER self, const CS
     self->streamInfo.profile = 1;
     break;
 
+  case AOT_AAC_MAIN:
   case AOT_SBR:
   case AOT_PS:
   case AOT_ER_AAC_LD:

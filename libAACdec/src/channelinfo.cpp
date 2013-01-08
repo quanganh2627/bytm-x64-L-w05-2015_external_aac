@@ -165,8 +165,16 @@ AAC_DECODER_ERROR IcsRead(HANDLE_FDK_BITSTREAM bs,
     {
       if ((UCHAR)FDKreadBits(bs,1) != 0 ) /* UCHAR PredictorDataPresent */
       {
-        ErrorStatus = AAC_DEC_UNSUPPORTED_PREDICTION;
-        goto bail;
+        int sfb;
+        int limit = (pIcsInfo->TotalSfBands < pIcsInfo->MaxSfBands) ? pIcsInfo->TotalSfBands : pIcsInfo->MaxSfBands;
+
+        if ((UCHAR)FDKreadBits(bs,1) != 0) {
+            FDKreadBits(bs,5);
+        }
+
+        for (sfb = 0; sfb < limit; sfb++) {
+            FDKreadBits(bs,1);
+        }
       }
     }
 
